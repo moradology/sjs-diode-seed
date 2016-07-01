@@ -1,3 +1,5 @@
+import com.lihaoyi.workbench.Plugin._
+
 name := "geotrellis-demo"
 
 scalaVersion := "2.11.8"
@@ -50,11 +52,12 @@ enablePlugins(ScalaJSPlugin)
 
 workbenchSettings
 
+bootSnippet := "geotrellis.demo.client.Main().main();"
+
 mainClass in (Compile, run) := Some("geotrellis.demo.client.Main")
 
-refreshBrowsers <<= refreshBrowsers.triggeredBy(fastOptJS in Compile)
-
-bootSnippet := "geotrellis.demo.client.Main().main();"
+//refreshBrowsers <<= refreshBrowsers.triggeredBy(fastOptJS in Compile)
+updateBrowsers <<= updateBrowsers.triggeredBy(fastOptJS in Compile)
 
 jsDependencies ++= Seq(
   "org.webjars" % "jquery" % "2.2.1"

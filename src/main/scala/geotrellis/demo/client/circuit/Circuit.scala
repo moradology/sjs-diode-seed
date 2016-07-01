@@ -20,8 +20,9 @@ import geotrellis.demo.client._
 class LMapHandler[M](modelRW: ModelRW[M, LMapModel]) extends ActionHandler(modelRW) {
   override def handle = {
     case InitLMap(elemID: String, mapOpts: LMapOptions) =>
-      val map = LMap(elemID, mapOpts)
-      updated(value.copy(map = Try(LMap(elemID, mapOpts)).toOption))
+      val map = Try(LMap(elemID, mapOpts)).toOption
+      println("map", map)
+      updated(value.copy(map = map))
     case UpdateZoomLevel(zl) =>
       updated(value.copy(zoomLevel = zl))
 

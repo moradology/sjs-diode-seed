@@ -2,12 +2,13 @@ package geotrellis.demo.client
 
 import scala.scalajs.js.JSApp
 
-import geotrellis.demo.client.circuit._
-import geotrellis.demo.client.routes._
 import japgolly.scalajs.react._
 import japgolly.scalajs.react.extra.router._
+import diode._
 import org.scalajs.dom
 
+import geotrellis.demo.client.circuit._
+import geotrellis.demo.client.routes._
 
 object Main extends JSApp {
 
@@ -35,8 +36,12 @@ object Main extends JSApp {
     Router(baseUrl, routerConfig.logToConsole)()
 
   def main(): Unit = {
+    println("Starting application")
+    println(CircuitRoot.zoom(_.mapModel).value)
     CircuitRoot.addProcessor(new LoggingProcessor[RootModel])
 
     ReactDOM.render(router, dom.document.getElementsByClassName("app")(0))
+
+    println(CircuitRoot.zoom(_.mapModel).value)
   }
 }
